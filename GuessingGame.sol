@@ -39,8 +39,10 @@ contract BetContract {
         }  
     }  
       
-    function getHighestPrice() public view returns (uint) {  
-        ChainlinkHelper helper = new ChainlinkHelper(address: "0x6F7a38B974aB4E2dC68A5F53e97aC73524C9b445"); // Chainlink Helper contract address  
-        return helper.getProxi().callExternalFunction("getHighestPrice", [], this);  
-    }  
+    function getHighestPrice() public view returns (uint) {      
+       const address chainlinkAddress = "0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c";  
+       AggregatorV3Interface(chainlinkAddress) aggr;  
+       string memory response = aggr.getLatestAnswer();  
+        return uint(response);  
+   }
 }
